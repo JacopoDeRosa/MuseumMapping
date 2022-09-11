@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomDescriptor : MonoBehaviour
+[CreateAssetMenu(fileName = "New Room", menuName = "New Room")]
+public class RoomDescriptor : ScriptableObject
 {
     [SerializeField] private string _name;
     [SerializeField] private Sprite _pictureA, _pictureB, _pictureC;
