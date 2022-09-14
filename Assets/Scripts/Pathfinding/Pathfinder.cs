@@ -119,7 +119,7 @@ public class Pathfinder : MonoBehaviour
     private IEnumerator MovementRoutine()
     {
         _lineRender.positionCount = 0;
-        WaitForSeconds wait = new WaitForSeconds(1);
+        WaitForSeconds wait = new WaitForSeconds(0.2f);
         int i = 1;
         while (_moveQueue.Count > 0)
         {
