@@ -9,8 +9,14 @@ public class RoomUI : MonoBehaviour
     [SerializeField] private TMP_Text _nameText, _description;
     [SerializeField] private Image _imageA, _imageB, _imageC;
     [SerializeField] private Pathfinder _pathfinder;
+    [SerializeField] private Button _moveButton;
 
     private RoomDescriptor _room;
+
+    private void Awake()
+    {
+        _moveButton.onClick.AddListener(TakeMeThere);
+    }
 
     public void ReadRoom(RoomDescriptor room)
     {
@@ -22,7 +28,7 @@ public class RoomUI : MonoBehaviour
         _imageC.sprite = room.PictureC;
     }
 
-    public void TakeMeThere()
+    private void TakeMeThere()
     {
         if (_room == null) return;
 

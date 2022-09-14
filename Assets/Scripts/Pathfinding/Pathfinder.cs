@@ -7,7 +7,7 @@ public class Pathfinder : MonoBehaviour
     [SerializeField] private PathNode _startNode;
     [SerializeField] private PathNode[] _interactableNodes;
     [SerializeField] private GameObject _character;
-
+    [SerializeField] private LineRenderer _lineRender;
 
     private PathNode _currentNode;
     private PathNode _destination;
@@ -118,10 +118,17 @@ public class Pathfinder : MonoBehaviour
 
     private IEnumerator MovementRoutine()
     {
+        _lineRender.positionCount = 0;
         WaitForSeconds wait = new WaitForSeconds(1);
+        int i = 1;
         while (_moveQueue.Count > 0)
         {
-            _character.transform.position = _moveQueue.Pop().transform.position;
+            
+            PathNode node = _moveQueue.Pop();
+            _character.transform.position = node.transform.position;
+            _lineRender.positionCount = i;
+            _lineRender.SetPosition(i - 1, node.transform.position);
+            i++;
             if (_moveQueue.TryPeek(out PathNode peek))
             {
                 _character.transform.rotation = Quaternion.LookRotation(new Vector3(peek.transform.position.x, _character.transform.position.y, peek.transform.position.z) - _character.transform.position);
