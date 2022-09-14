@@ -9,15 +9,9 @@ public class RoomDescriptionUI : MonoBehaviour
     [SerializeField] private TMP_Text _nameText, _description;
     [SerializeField] private Image _imageA, _imageB, _imageC, _imageD;
     [SerializeField] private Pathfinder _pathfinder;
-    [SerializeField] private Button _moveButton;
     [SerializeField] private FoldingBar _bar;
 
     private Room _room;
-
-    private void Awake()
-    {
-        _moveButton.onClick.AddListener(TakeMeThere);
-    }
 
     public void SetRoom(Room room)
     {
@@ -30,10 +24,8 @@ public class RoomDescriptionUI : MonoBehaviour
         _imageD.sprite = room.PictureD;
     }
 
-    private void TakeMeThere()
+    public void TakeMeThere()
     {
-        if (_room == null) return;
-
         _pathfinder.MoveTo(_room.NodeIndex);
     }
 

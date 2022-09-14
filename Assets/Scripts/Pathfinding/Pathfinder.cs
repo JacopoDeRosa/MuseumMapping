@@ -35,6 +35,7 @@ public class Pathfinder : MonoBehaviour
 
     private void MoveTo(PathNode node)
     {
+        
         if (_frontier == null)
         {
             _frontier = new List<PathNode>();
@@ -50,9 +51,7 @@ public class Pathfinder : MonoBehaviour
         int i = 0;
 
         while (pathFound == false && i < 120)
-        {
-
-         
+        {   
             if(_frontier.Count == 0)
             { 
                 ExploreNode(_currentNode);
@@ -74,11 +73,10 @@ public class Pathfinder : MonoBehaviour
                 _frontier.AddRange(_newFrontier);
                 _newFrontier.Clear();
             }
-
             i++;
         }
-
         _currentNode = node;
+   //     GameObject.CreatePrimitive(PrimitiveType.Capsule).transform.position = new Vector3(0, 1, 0);
     }
 
     private bool ExploreNode(PathNode node)
@@ -96,6 +94,7 @@ public class Pathfinder : MonoBehaviour
             {
                 GenerateMoveQueue();
                 StartCoroutine(MovementRoutine());
+                
                 return true;
             }
         }
@@ -119,7 +118,6 @@ public class Pathfinder : MonoBehaviour
     private IEnumerator MovementRoutine()
     {
         _lineRender.positionCount = 0;
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
         int i = 1;
         while (_moveQueue.Count > 0)
         {
@@ -133,7 +131,7 @@ public class Pathfinder : MonoBehaviour
             {
                 _character.transform.rotation = Quaternion.LookRotation(new Vector3(peek.transform.position.x, _character.transform.position.y, peek.transform.position.z) - _character.transform.position);
             }
-            yield return wait;
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }
